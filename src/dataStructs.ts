@@ -2,7 +2,8 @@ export class Node {
 
   left: Node;
   right: Node;
-  bnds: Array<any> = [];
+  upper: number;
+  lower: number;
 
   constructor(public p: Item) { }
 
@@ -10,7 +11,7 @@ export class Node {
 
 export class Item {
 
-  hist: Array<any> = [];
+  hist: Array<number> = [];
 
   constructor(public id: any) { }
 

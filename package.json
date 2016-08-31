@@ -8,6 +8,10 @@
     "test": "./node_modules/karma/bin/karma start"
   },
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danii-nebot/vptree.git"
+  },
   "devDependencies": {
     "browserify": "^13.1.0",
     "jasmine-core": "2.4.1",

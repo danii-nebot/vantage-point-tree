@@ -15,3 +15,20 @@ describe("test VPTree creation", () => {
     expect(vpTree.root).toBeNull();
   });
 });
+
+// TODO:
+describe("test VPTree creation from a mock dataset", () => {
+  var vpTree: VPTree;
+  var dataset: Array<any> = ['a', 'b', 'c'];
+
+  beforeEach(() => {
+    vpTree = new VPTree();
+    spyOn(vpTree, 'recurseVPTRee').and.callThrough();
+  });
+
+  it("should recursively create a tree node structure from the given dataset", () => {
+    vpTree.makeVPTree(dataset);
+    expect(vpTree.recurseVPTRee).toHaveBeenCalledTimes(dataset.length);
+    expect(vpTree.root).not.toBeNull();
+  });
+});

@@ -16,7 +16,6 @@ describe("test VPTree creation", () => {
   });
 });
 
-// TODO:
 describe("test VPTree creation from a mock dataset", () => {
   var vpTree: VPTree;
   var dataset: Array<any> = ['a', 'b', 'c'];
@@ -57,5 +56,31 @@ describe("test custom and default distance functions", () => {
     expect(vpTree.d(2, 3)).toEqual('foobar');
     expect(vpTree.d(3, 2)).toEqual('foobar');
     expect(vpTree.d(5, 123)).toEqual('foobar');
+  });
+});
+
+describe("test VPTree creation from a specific mock dataset that represent positions", () => {
+  var vpTree: VPTree;
+  var dataset: Array<any> = [1, 10, 100];
+
+  beforeEach(() => {
+    vpTree = new VPTree(dataset);
+  });
+
+  it("should create a balanced tree for this dataset", () => {
+    expect(vpTree.root.left).toBeTruthy();
+    expect(vpTree.root.left.left).toBeNull();
+    expect(vpTree.root.left.right).toBeNull();
+
+    expect(vpTree.root.right).toBeTruthy();
+    expect(vpTree.root.right.left).toBeNull();
+    expect(vpTree.root.right.right).toBeNull();
+  });
+
+  it("each node in tree should have correct upper and lower bounds", () => {
+    vpTree.print();
+    expect(vpTree.root.upper).not.toBeLessThan(vpTree.root.lower);
+    expect(vpTree.root.left.upper).not.toBeLessThan(vpTree.root.left.lower);
+    expect(vpTree.root.right.upper).not.toBeLessThan(vpTree.root.right.lower);
   });
 });

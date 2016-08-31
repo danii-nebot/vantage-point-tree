@@ -65,10 +65,26 @@ export class VPTree {
     node.left = this.recurseVPTRee(L);
     node.right = this.recurseVPTRee(R);
 
-    // TODO:
-    // node$\uparrow$.bnds $:=$ Merge(node$\uparrow$.left$\uparrow$.bnds, node$\uparrow$.right$\uparrow$.bnds,node$\uparrow$.p$\uparrow$.hist);
+    let bnds = this.createBounds(node.left, node.right, node.p.hist);
+    node.lower = bnds[0];
+    node.upper = bnds[1];
 
     return node;
+  }
+
+  createBounds(node1, node2, list) {
+    let min = Math.min(...list);
+    let max = Math.max(...list);
+
+    if (node1) {
+      min = Math.min(min, node1.lower);
+      max = Math.max(max, node1.upper);
+    }
+    if (node2) {
+      min = Math.min(min, node2.lower);
+      max = Math.max(max, node2.upper);
+    }
+    return [min, max];
   }
 
   // TODO:

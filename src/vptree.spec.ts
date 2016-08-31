@@ -28,8 +28,14 @@ describe("test VPTree creation from a mock dataset", () => {
   it("should recursively iterate thru the whole list extracting its elements", () => {
     spyOn(vpTree, 'recurseVPTRee').and.callThrough();
     vpTree.makeVPTree(dataset);
-    expect(vpTree.recurseVPTRee).toHaveBeenCalledTimes(dataset.length + 1);
+    expect(vpTree.recurseVPTRee).toHaveBeenCalledTimes(2 * dataset.length + 1);
+  });
+
+  it("should have a root with a left element and a right element", () => {
+    vpTree.makeVPTree(dataset);
     expect(vpTree.root).not.toBeNull();
+    expect(vpTree.root.left).not.toBeUndefined();
+    expect(vpTree.root.right).not.toBeUndefined();
   });
 });
 

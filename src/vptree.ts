@@ -38,12 +38,13 @@ export class VPTree {
     }
 
     let node: Node = new Node(this.selectVantagePoint(list));
+
     // remove vp from list
     list.splice(list.indexOf(node.p), 1);
 
     let distances: Array<number> = [];
     for (let item of list) {
-      let dist = this.d(item, node.p);
+      let dist = this.d(item.id, node.p.id);
       item.hist.push(dist);
       distances.push(dist);
     }

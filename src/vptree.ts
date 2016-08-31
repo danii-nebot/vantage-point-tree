@@ -76,4 +76,17 @@ export class VPTree {
     return list[Math.floor(Math.random() * list.length)];
   }
 
+  // LOG:
+  recursivePrint(node: Node) {
+    if (!node) {
+      return;
+    }
+    console.log(node);
+    this.recursivePrint(node.left);
+    this.recursivePrint(node.right);
+  }
+
+  print() {
+    this.recursivePrint(this.root);
+  }
 }

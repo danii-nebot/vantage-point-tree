@@ -11,6 +11,15 @@ export class VPTree {
     }
   }
 
+  d(a: any, b: any) {
+    if (this.dist) {
+      return this.dist(a, b);
+    }
+
+    // default manhattan distance
+    return Math.abs(b - a);
+  }
+
   makeVPTree(dataset: Array<any>) {
     let list: Array<Item> = [];
 

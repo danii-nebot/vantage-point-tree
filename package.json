@@ -1,0 +1,22 @@
+{
+  "name": "vptree",
+  "version": "0.0.1",
+  "author": "Danii Nebot <daniign@gmail.com>",
+  "description": "TypeScript implementation of the Vantage-Point Tree N-Nearest Neighbor search algorithm",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "jasmine-core": "2.4.1",
+    "karma": "^1.2.0",
+    "karma-browserify": "^5.1.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.0.2",
+    "requirejs": "^2.2.0",
+    "systemjs": "^0.19.37",
+    "watchify": "^3.7.0"
+  }
+}

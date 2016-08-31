@@ -1,0 +1,11 @@
+.atomignore
+node_modules
+tests
+typings
+tsconfig.json
+typings.json
+*.ts
+!*.d.ts
+.npmignore
+*.test.js
+*.test.d.ts

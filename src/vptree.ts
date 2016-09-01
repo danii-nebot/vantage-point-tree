@@ -51,42 +51,49 @@ export class VPTree {
       distances.push(dist);
     }
 
-    let mu: number = MathUtils.median(distances);
-
-    let L: Array<Item> = [];
-    let R: Array<Item> = [];
+    let L: Array<Item> = [],
+      R: Array<Item> = [],
+      minL = Infinity,
+      minR = Infinity,
+      maxL = 0,
+      maxR = 0,
+      mu: number = MathUtils.median(distances);
 
     for (let item of list) {
       if (item.dist < mu) {
         L.push(item);
+        if (item.dist < minL) {
+          minL = item.dist;
+        }
+        if (item.dist > maxL) {
+          maxL = item.dist;
+        }
       } else {
         R.push(item);
+        if (item.dist < minR) {
+          minR = item.dist;
+        }
+        if (item.dist > maxR) {
+          maxR = item.dist;
+        }
       }
     }
+
+    if (minL === Infinity) {
+      minL = 0;
+    }
+
+    if (minR === Infinity) {
+      minR = 0;
+    }
+
+    node.left_bnd = [minL, maxL];
+    node.right_bnd = [minR, maxR];
 
     node.left = this.recurseVPTRee(L);
     node.right = this.recurseVPTRee(R);
 
-    let bnds = this.createBounds(node.left, node.right, [1, 2, 3]);
-    node.lower = bnds[0];
-    node.upper = bnds[1];
-
     return node;
-  }
-
-  createBounds(node1, node2, list) {
-    let min = Math.min(...list);
-    let max = Math.max(...list);
-
-    if (node1) {
-      min = Math.min(min, node1.lower);
-      max = Math.max(max, node1.upper);
-    }
-    if (node2) {
-      min = Math.min(min, node2.lower);
-      max = Math.max(max, node2.upper);
-    }
-    return [min, max];
   }
 
   // TODO:

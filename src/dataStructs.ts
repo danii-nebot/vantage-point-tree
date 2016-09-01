@@ -3,8 +3,8 @@ export class Node {
   p: any;
   left: Node;
   right: Node;
-  upper: number;
-  lower: number;
+  left_bnd: Array<number>;
+  right_bnd: Array<number>;
 
   constructor(item: Item) {
     this.p = item.id;

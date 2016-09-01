@@ -78,9 +78,13 @@ describe("test VPTree creation from a specific mock dataset that represent posit
   });
 
   it("each node in tree should have correct upper and lower bounds", () => {
-    expect(vpTree.root.upper).not.toBeLessThan(vpTree.root.lower);
-    expect(vpTree.root.left.upper).not.toBeLessThan(vpTree.root.left.lower);
-    expect(vpTree.root.right.upper).not.toBeLessThan(vpTree.root.right.lower);
+    expect(vpTree.root.left_bnd[0]).not.toBeGreaterThan(vpTree.root.left_bnd[1]);
+    expect(vpTree.root.left.left_bnd[0]).not.toBeGreaterThan(vpTree.root.left.left_bnd[1]);
+    expect(vpTree.root.right.left_bnd[0]).not.toBeGreaterThan(vpTree.root.right.left_bnd[1]);
+
+    expect(vpTree.root.right_bnd[0]).not.toBeGreaterThan(vpTree.root.right_bnd[1]);
+    expect(vpTree.root.left.right_bnd[0]).not.toBeGreaterThan(vpTree.root.left.right_bnd[1]);
+    expect(vpTree.root.right.right_bnd[0]).not.toBeGreaterThan(vpTree.root.right.right_bnd[1]);
   });
 
   it("distance to left branch should be less than distance to right branch", () => {

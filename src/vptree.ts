@@ -101,6 +101,68 @@ export class VPTree {
     return Math.floor(Math.random() * list.length);
   }
 
+
+  /*
+  Called with query `q' and the root of a vp-tree; returns the `id' of a nearest neighbor in global variable `best'.
+  Before calling, global variable `tau' is set to the desired search radius and
+  `best' should be set to $\emptyset$.
+  Setting tau to 1 then searches without constraint.
+  On return `tau' is the distance to `best'.
+  We denote by $I_L$ the open interval whose left endpoint is n$\uparrow$.left_bnd[low]-tau
+  and right endpoint is n$\uparrow$.left_bnd[high]+tau.
+  Open interval $I_R$ is defined similarly.
+
+  q: item to find
+  r: search radius
+  n: number of items to find (n-nearest)
+  */
+  find(q: any, r: number = Infinity, n: number = 1) {
+    var tau: number = r;
+    var best: any = null;
+    var numberOfRuns = 0;
+
+    var search = (node: Node) => {
+      if (!node) {
+        return null;
+      }
+
+      numberOfRuns++;
+      let x = this.d(node.p, q);
+
+      if (x < tau) {
+        best = node.p;
+        tau = x;
+      }
+
+      let middle: number = (node.left_bnd[1] + node.right_bnd[0]) / 2;
+
+      if (x < middle) {
+        if (x > node.left_bnd[0] - tau && x < node.left_bnd[1] + tau) {
+          search(node.left);
+        }
+
+        if (x > node.right_bnd[0] - tau && x < node.right_bnd[1] + tau) {
+          search(node.right);
+        }
+
+      } else {
+
+        if (x > node.right_bnd[0] - tau && x < node.right_bnd[1] + tau) {
+          search(node.right);
+        }
+
+        if (x > node.left_bnd[0] - tau && x < node.left_bnd[1] + tau) {
+          search(node.left);
+        }
+      }
+    }
+
+    search(this.root);
+
+    // console.log(best, numberOfRuns, tau);
+    return best;
+  }
+
   // LOG:
   recursivePrint(node: Node) {
     if (!node) {

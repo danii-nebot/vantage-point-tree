@@ -116,4 +116,30 @@ describe("test VPTree creation from a specific mock dataset that represent posit
       .toBeLessThan(vpTree.d(vpTree.root.right.p, vpTree.root.right.right.p));
   });
 
+  describe("search algorithm", () => {
+
+    beforeEach(() => {
+      vpTree = new VPTree();
+    });
+
+    it("should return null when searching an empty tree", () => {
+      expect(vpTree.find('a')).toBeNull();
+    });
+
+    it("should return the root when searching for it", () => {
+      vpTree.makeVPTree([1]);
+      expect(vpTree.find(1)).toBe(1);
+    });
+
+    it("should return the root when it is within the search radius", () => {
+      vpTree.makeVPTree([1]);
+      expect(vpTree.find(5, 5)).toBe(1);
+    });
+
+    it("should find an element searching recursively thru the tree", () => {
+      vpTree.makeVPTree([1, 2, 3, 4, 5, /* 6, 7, */ 8, 9, 10]);
+      expect(vpTree.find(6)).toBe(5);
+    });
+  });
+
 });

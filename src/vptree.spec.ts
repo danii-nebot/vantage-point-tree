@@ -61,34 +61,59 @@ describe("test custom and default distance functions", () => {
 
 describe("test VPTree creation from a specific mock dataset that represent positions", () => {
   var vpTree: VPTree;
-  var dataset: Array<any> = [1, 10, 100];
+  var dataset: Array<any> = [1, 10, 100, 99, 200, 5, 8];
 
   beforeEach(() => {
     vpTree = new VPTree(dataset);
   });
 
-  it("should create a balanced tree for this dataset", () => {
+  it("should always create a balanced tree for this dataset", () => {
     expect(vpTree.root.left).toBeTruthy();
-    expect(vpTree.root.left.left).toBeNull();
-    expect(vpTree.root.left.right).toBeNull();
+    expect(vpTree.root.left.left).toBeTruthy();
+    expect(vpTree.root.left.right).toBeTruthy();
+
+    expect(vpTree.root.left.left.left).toBeNull();
+    expect(vpTree.root.left.left.right).toBeNull();
+    expect(vpTree.root.left.left.left).toBeNull();
+    expect(vpTree.root.left.left.right).toBeNull();
 
     expect(vpTree.root.right).toBeTruthy();
-    expect(vpTree.root.right.left).toBeNull();
-    expect(vpTree.root.right.right).toBeNull();
+    expect(vpTree.root.right.left).toBeTruthy();
+    expect(vpTree.root.right.right).toBeTruthy();
+
+    expect(vpTree.root.right).toBeTruthy();
+    expect(vpTree.root.right.left.left).toBeNull();
+    expect(vpTree.root.right.left.right).toBeNull();
+    expect(vpTree.root.right.right.left).toBeNull();
+    expect(vpTree.root.right.right.right).toBeNull();
   });
 
   it("each node in tree should have correct upper and lower bounds", () => {
     expect(vpTree.root.left_bnd[0]).not.toBeGreaterThan(vpTree.root.left_bnd[1]);
-    expect(vpTree.root.left.left_bnd[0]).not.toBeGreaterThan(vpTree.root.left.left_bnd[1]);
-    expect(vpTree.root.right.left_bnd[0]).not.toBeGreaterThan(vpTree.root.right.left_bnd[1]);
-
     expect(vpTree.root.right_bnd[0]).not.toBeGreaterThan(vpTree.root.right_bnd[1]);
+
+    expect(vpTree.root.left.left_bnd[0]).not.toBeGreaterThan(vpTree.root.left.left_bnd[1]);
     expect(vpTree.root.left.right_bnd[0]).not.toBeGreaterThan(vpTree.root.left.right_bnd[1]);
+
+    expect(vpTree.root.right.left_bnd[0]).not.toBeGreaterThan(vpTree.root.right.left_bnd[1]);
     expect(vpTree.root.right.right_bnd[0]).not.toBeGreaterThan(vpTree.root.right.right_bnd[1]);
+
+    // leafs bounds are always 0,0
+    expect(vpTree.root.left.left.left_bnd[0]).toBe(0);
+    expect(vpTree.root.left.left.left_bnd[1]).toBe(0);
+    expect(vpTree.root.left.left.right_bnd[0]).toBe(0);
+    expect(vpTree.root.left.left.right_bnd[1]).toBe(0);
   });
 
   it("distance to left branch should be less than distance to right branch", () => {
-    expect(vpTree.d(vpTree.root.p, vpTree.root.left.p)).toBeLessThan(vpTree.d(vpTree.root.p, vpTree.root.right.p));
+    expect(vpTree.d(vpTree.root.p, vpTree.root.left.p))
+      .toBeLessThan(vpTree.d(vpTree.root.p, vpTree.root.right.p));
+
+    expect(vpTree.d(vpTree.root.left.p, vpTree.root.left.left.p))
+      .toBeLessThan(vpTree.d(vpTree.root.left.p, vpTree.root.left.right.p));
+
+    expect(vpTree.d(vpTree.root.right.p, vpTree.root.right.left.p))
+      .toBeLessThan(vpTree.d(vpTree.root.right.p, vpTree.root.right.right.p));
   });
 
 });

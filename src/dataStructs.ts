@@ -1,17 +1,22 @@
 export class Node {
 
+  p: any;
   left: Node;
   right: Node;
   upper: number;
   lower: number;
 
-  constructor(public p: Item) { }
+  constructor(item: Item) {
+    this.p = item.id;
+  }
 
 }
 
 export class Item {
 
-  hist: Array<number> = [];
+  dist: number;
+  // unused
+  // hist: Array<number> = [];
 
   constructor(public id: any) { }
 

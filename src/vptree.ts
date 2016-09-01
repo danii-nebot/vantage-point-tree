@@ -37,15 +37,17 @@ export class VPTree {
       return null;
     }
 
-    let node: Node = new Node(this.selectVantagePoint(list));
+    let vpIndex = this.selectVantagePointIndex(list);
+    let node: Node = new Node(list[vpIndex]);
 
     // remove vp from list
-    list.splice(list.indexOf(node.p), 1);
+    list.splice(vpIndex, 1);
 
     let distances: Array<number> = [];
     for (let item of list) {
-      let dist = this.d(item.id, node.p.id);
-      item.hist.push(dist);
+      let dist = this.d(item.id, node.p);
+      // item.hist.push(dist);
+      item.dist = dist;
       distances.push(dist);
     }
 
@@ -55,7 +57,7 @@ export class VPTree {
     let R: Array<Item> = [];
 
     for (let item of list) {
-      if (item.hist[item.hist.length - 1] < mu) {
+      if (item.dist < mu) {
         L.push(item);
       } else {
         R.push(item);
@@ -65,7 +67,7 @@ export class VPTree {
     node.left = this.recurseVPTRee(L);
     node.right = this.recurseVPTRee(R);
 
-    let bnds = this.createBounds(node.left, node.right, node.p.hist);
+    let bnds = this.createBounds(node.left, node.right, [1, 2, 3]);
     node.lower = bnds[0];
     node.upper = bnds[1];
 
@@ -88,8 +90,8 @@ export class VPTree {
   }
 
   // TODO:
-  selectVantagePoint(list: Array<any>) {
-    return list[Math.floor(Math.random() * list.length)];
+  selectVantagePointIndex(list: Array<any>) {
+    return Math.floor(Math.random() * list.length);
   }
 
   // LOG:

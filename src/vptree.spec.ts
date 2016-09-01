@@ -84,7 +84,7 @@ describe("test VPTree creation from a specific mock dataset that represent posit
   });
 
   it("distance to left branch should be less than distance to right branch", () => {
-    expect(vpTree.d(vpTree.root.p.id, vpTree.root.left.p.id)).toBeLessThan(vpTree.d(vpTree.root.p.id, vpTree.root.right.p.id));
+    expect(vpTree.d(vpTree.root.p, vpTree.root.left.p)).toBeLessThan(vpTree.d(vpTree.root.p, vpTree.root.right.p));
   });
 
 });

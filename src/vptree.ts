@@ -1,3 +1,13 @@
+/* *****************************************************************************
+TypeScript implementation of the Vantage-Point Tree N-Nearest Neighbor search algorithm
+
+As defined in the paper: http://pnylab.com/pny/papers/vptree/vptree/vptree.html
+
+I've tried to keep the names of the functions and variables
+as close as those defined in the paper as possible, for clarity.
+(although that might not be the case, actually)
+***************************************************************************** */
+
 import { Node } from './dataStructs';
 import { Item } from './dataStructs';
 import { MathUtils } from './MathUtils';
@@ -12,7 +22,9 @@ export class VPTree {
     }
   }
 
-  // distance function
+  /**
+  * distance function
+  */
   d(a: any, b: any) {
     if (this.dist) {
       return this.dist(a, b);
@@ -22,16 +34,22 @@ export class VPTree {
     return Math.abs(b - a);
   }
 
-  makeVPTree(dataset: Array<any>) {
+  /**
+  * entry point to build vp-tree
+  */
+  makeVPTree(s: Array<any>) {
     let list: Array<Item> = [];
 
-    for (let el of dataset) {
+    for (let el of s) {
       list.push(new Item(el));
     }
 
     this.root = this.recurseVPTRee(list);
   }
 
+  /**
+  * Given set S of metric space elements, returns pointer to the root of an optimized vp-tree
+  */
   recurseVPTRee(list: Array<Item>) {
     if (list.length === 0) {
       return null;
@@ -96,25 +114,30 @@ export class VPTree {
     return node;
   }
 
-  // TODO:
+  //  TODO:
+  /**
+  * construct a set of vantage point candidates, from which the median and
+  * a corresponding moment are estimated. Finally, based on these statistical `images`,
+  * the candidate with the largest moment is chosen
+  */
   selectVantagePointIndex(list: Array<any>) {
     return Math.floor(Math.random() * list.length);
   }
 
 
   /*
-  Called with query `q' and the root of a vp-tree; returns the `id' of a nearest neighbor in global variable `best'.
-  Before calling, global variable `tau' is set to the desired search radius and
-  `best' should be set to $\emptyset$.
-  Setting tau to 1 then searches without constraint.
-  On return `tau' is the distance to `best'.
-  We denote by $I_L$ the open interval whose left endpoint is n$\uparrow$.left_bnd[low]-tau
-  and right endpoint is n$\uparrow$.left_bnd[high]+tau.
-  Open interval $I_R$ is defined similarly.
-
-  q: item to find
-  r: search radius
-  n: number of items to find (n-nearest)
+  * Called with query `q' and the root of a vp-tree; returns the `id' of a nearest neighbor in global variable `best'.
+  * Before calling, global variable `tau' is set to the desired search radius and
+  * `best' should be set to $\emptyset$.
+  * Setting tau to 1 then searches without constraint.
+  * On return `tau' is the distance to `best'.
+  * We denote by $I_L$ the open interval whose left endpoint is n$\uparrow$.left_bnd[low]-tau
+  * and right endpoint is n$\uparrow$.left_bnd[high]+tau.
+  * Open interval $I_R$ is defined similarly.
+  *
+  * q: item to find
+  * r: search radius
+  * n: number of items to find (n-nearest)
   */
   find(q: any, r: number = Infinity, n: number = 1) {
     var tau: number = r;
@@ -163,7 +186,10 @@ export class VPTree {
     return best;
   }
 
-  // LOG:
+  // TODO?
+  /**
+  * LOG:
+  */
   recursivePrint(node: Node) {
     if (!node) {
       return;

@@ -78,9 +78,13 @@ describe("test VPTree creation from a specific mock dataset that represent posit
   });
 
   it("each node in tree should have correct upper and lower bounds", () => {
-    vpTree.print();
     expect(vpTree.root.upper).not.toBeLessThan(vpTree.root.lower);
     expect(vpTree.root.left.upper).not.toBeLessThan(vpTree.root.left.lower);
     expect(vpTree.root.right.upper).not.toBeLessThan(vpTree.root.right.lower);
   });
+
+  it("distance to left branch should be less than distance to right branch", () => {
+    expect(vpTree.d(vpTree.root.p.id, vpTree.root.left.p.id)).toBeLessThan(vpTree.d(vpTree.root.p.id, vpTree.root.right.p.id));
+  });
+
 });

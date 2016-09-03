@@ -10,7 +10,7 @@ as close as those defined in the paper as possible, for clarity.
 
 import { Node } from './dataStructs';
 import { Item } from './dataStructs';
-import { MathUtils } from './MathUtils';
+import { median } from './MathUtils';
 
 export class VPTree {
 
@@ -75,7 +75,7 @@ export class VPTree {
       minR = Infinity,
       maxL = 0,
       maxR = 0,
-      mu: number = MathUtils.median(distances);
+      mu: number = median(distances);
 
     for (let item of list) {
       if (item.dist < mu) {

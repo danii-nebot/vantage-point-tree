@@ -21,3 +21,40 @@ export class Item {
   constructor(public id: any) { }
 
 }
+
+export class NQueue {
+
+  private queue: Array<Item> = [];
+
+  constructor(public size: number = 1, public threshold: number = Infinity) { };
+
+  push(el, score: number) {
+    if (score < this.threshold) {
+      let item = new Item(el);
+      item.dist = score;
+      this.queue.push(item);
+      this.queue.sort((a, b) => {
+        return a.dist - b.dist;
+      });
+
+      if (this.queue.length >= this.size) {
+        if (this.queue.length > this.size) {
+          this.queue.pop(); // remove last element (worst score)
+        }
+        this.threshold = this.queue[this.queue.length - 1].dist;
+      }
+    }
+  }
+
+  getResult() {
+    if (!this.queue.length) {
+      return null;
+    }
+
+    if (this.queue.length === 1) {
+      return this.queue[0].id;
+    }
+
+    return this.queue;
+  }
+}

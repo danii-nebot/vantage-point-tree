@@ -8,13 +8,13 @@ as close as those defined in the paper as possible, for clarity.
 (although that might not be the case, actually)
 ***************************************************************************** */
 
-import { Node } from './dataStructs';
-import { Item } from './dataStructs';
+import { Node, Item, NQueue } from './dataStructs';
 import { median } from './MathUtils';
 
 export class VPTree {
 
   root: Node = null;
+  numberOfSearchOps = 0;
 
   constructor(dataset: Array<any> = null, private dist: Function = null) {
     if (dataset) {
@@ -136,25 +136,27 @@ export class VPTree {
   * Open interval $I_R$ is defined similarly.
   *
   * q: item to find
-  * r: search radius
   * n: number of items to find (n-nearest)
+  * r: search radius
   */
-  find(q: any, r: number = Infinity, n: number = 1) {
+  find(q: any, n: number = 1, r: number = Infinity) {
     var tau: number = r;
-    var best: any = null;
-    var numberOfRuns = 0;
+    var queue = new NQueue(n, r);
+    this.numberOfSearchOps = 0;
 
+    // internal procedure to search
     var search = (node: Node) => {
       if (!node) {
         return null;
       }
 
-      numberOfRuns++;
+      this.numberOfSearchOps++;
+
       let x = this.d(node.p, q);
 
-      if (x < tau) {
-        best = node.p;
-        tau = x;
+      if (x < queue.threshold) {
+        queue.push(node.p, x);
+        tau = queue.threshold;
       }
 
       let middle: number = (node.left_bnd[1] + node.right_bnd[0]) / 2;
@@ -178,12 +180,11 @@ export class VPTree {
           search(node.left);
         }
       }
-    }
+    };
 
     search(this.root);
 
-    // console.log(best, numberOfRuns, tau);
-    return best;
+    return queue.getResult();
   }
 
   // TODO?

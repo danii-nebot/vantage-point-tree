@@ -1,4 +1,7 @@
 import { VPTree } from './vptree';
+declare var require: any;
+var capitals = require('./data/capitals.json');
+import { haversineDistance } from './MathUtils';
 
 describe("test VPTree creation", () => {
   var vpTree: VPTree;
@@ -115,31 +118,52 @@ describe("test VPTree creation from a specific mock dataset that represent posit
     expect(vpTree.d(vpTree.root.right.p, vpTree.root.right.left.p))
       .toBeLessThan(vpTree.d(vpTree.root.right.p, vpTree.root.right.right.p));
   });
+});
 
-  describe("search algorithm", () => {
+describe("search algorithm", () => {
 
-    beforeEach(() => {
-      vpTree = new VPTree();
-    });
+  var vpTree: VPTree;
 
-    it("should return null when searching an empty tree", () => {
-      expect(vpTree.find('a')).toBeNull();
-    });
-
-    it("should return the root when searching for it", () => {
-      vpTree.makeVPTree([1]);
-      expect(vpTree.find(1)).toBe(1);
-    });
-
-    it("should return the root when it is within the search radius", () => {
-      vpTree.makeVPTree([1]);
-      expect(vpTree.find(5, 5)).toBe(1);
-    });
-
-    it("should find an element searching recursively thru the tree", () => {
-      vpTree.makeVPTree([1, 2, 3, 4, 5, /* 6, 7, */ 8, 9, 10]);
-      expect(vpTree.find(6)).toBe(5);
-    });
+  beforeEach(() => {
+    vpTree = new VPTree();
   });
 
+  it("should return null when searching an empty tree", () => {
+    expect(vpTree.find('a')).toBeNull();
+  });
+
+  it("should return the root when searching for it", () => {
+    vpTree.makeVPTree([1]);
+    expect(vpTree.find(1)).toBe(1);
+  });
+
+  it("should return the root when it is within the search radius", () => {
+    vpTree.makeVPTree([1]);
+    expect(vpTree.find(5, 1, 5)).toBe(1);
+  });
+
+  it("should find an element searching recursively thru the tree", () => {
+    vpTree.makeVPTree([1, 2, 3, 4, 5, /* 6, 7, */ 8, 9, 10]);
+    expect(vpTree.find(6)).toBe(5);
+  });
+});
+
+describe("test for large dataset", () => {
+
+  var vpTree: VPTree;
+
+  beforeEach(() => {
+    vpTree = new VPTree(capitals, haversineDistance);
+  });
+
+  it("closest capital to Alicante should be Madrid, SPN", () => {
+    let capital = vpTree.find({ 'lat': 38.3, 'lon': -0.5 });
+    expect(capital.country).toBe("SPN");
+  });
+
+  it("closest three capitals to random point should be ordered", () => {
+    let closest = vpTree.find({ 'lat': -180 + Math.random() * 360, 'lon': -180 + Math.random() * 360 }, 3);
+    expect(closest[0].dist).toBeLessThan(closest[1].dist);
+    expect(closest[1].dist).toBeLessThan(closest[2].dist);
+  });
 });

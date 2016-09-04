@@ -12,6 +12,17 @@ export function median(values: Array<number>) {
   }
 }
 
+// http://www.wikihow.com/Calculate-Variance
+// $\mbox{2nd-Moment}_{d \in D}$  $(d(p,d)-\mbox{mu})$;
+export function secondMoment(values: Array<number>, mu: number = 0) {
+  if (isNaN(mu)) {
+    return 0;
+  }
+  let mean: number = values.reduce((prev, curr) => prev + curr) / values.length;
+  mean -= mu;
+  return values.reduce((prev, curr) => prev + (curr - mu - mean) * (curr - mu - mean)) / (values.length - 1);
+}
+
 // http://www.movable-type.co.uk/scripts/latlong.html
 // http://stackoverflow.com/questions/5260423/torad-javascript-function-throwing-error/21623256#21623256
 export function haversineDistance(p1, p2) {

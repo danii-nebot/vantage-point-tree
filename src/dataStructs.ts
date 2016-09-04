@@ -9,7 +9,6 @@ export class Node {
   constructor(item: Item) {
     this.p = item.id;
   }
-
 }
 
 export class Item {
@@ -19,7 +18,6 @@ export class Item {
   // hist: Array<number> = [];
 
   constructor(public id: any) { }
-
 }
 
 export class NQueue {

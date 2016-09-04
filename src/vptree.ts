@@ -9,7 +9,7 @@ as close as those defined in the paper as possible, for clarity.
 ***************************************************************************** */
 
 import { Node, Item, NQueue } from './dataStructs';
-import { median } from './MathUtils';
+import { median, secondMoment } from './MathUtils';
 
 export class VPTree {
 
@@ -114,14 +114,46 @@ export class VPTree {
     return node;
   }
 
-  //  TODO:
   /**
   * construct a set of vantage point candidates, from which the median and
   * a corresponding moment are estimated. Finally, based on these statistical `images`,
   * the candidate with the largest moment is chosen
   */
+  // TODO: TEST!
   selectVantagePointIndex(list: Array<any>) {
-    return Math.floor(Math.random() * list.length);
+
+    if (!list.length) {
+      return null;
+    }
+
+    if (list.length === 1) {
+      return 0;
+    }
+
+    let bestSpread: number = 0,
+      bestIndex: number = Math.floor(Math.random() * list.length);
+
+    // P $:=$ Random sample of S;
+    for (let i = 0; (i < 5 && i < list.length); i++) {
+      let randomIndex = Math.floor(Math.random() * list.length);
+      let D: Array<any> = [];
+      let distances: Array<number> = [];
+
+      for (let j = 0; (j < 10 && j < list.length); j++) {
+        D.push(Math.floor(Math.random() * list.length));
+        distances.push(this.d(list[randomIndex].id, list[D[D.length - 1]].id));
+      }
+
+      let mu = median(distances);
+      let spread = secondMoment(distances, mu);
+
+      if (spread > bestSpread) {
+        bestSpread = spread;
+        bestIndex = randomIndex;
+      }
+    }
+
+    return bestIndex;
   }
 
 

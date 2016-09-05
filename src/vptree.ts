@@ -8,8 +8,8 @@ as close as those defined in the paper as possible, for clarity.
 (although that might not be the case, actually)
 ***************************************************************************** */
 
-import { Node, Item, NQueue } from './dataStructs';
-import { median, secondMoment } from './MathUtils';
+import { Node, Item, NQueue } from './utils/dataStructs';
+import { median, secondMoment } from './utils/mathUtils';
 
 export class VPTree {
 

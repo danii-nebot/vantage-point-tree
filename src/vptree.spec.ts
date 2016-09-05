@@ -1,7 +1,7 @@
 import { VPTree } from './vptree';
 declare var require: any;
 var capitals = require('./data/capitals.json');
-import { haversineDistance } from './MathUtils';
+import { haversineDistance } from './utils/distancesLibrary';
 
 describe("test VPTree creation", () => {
   var vpTree: VPTree;

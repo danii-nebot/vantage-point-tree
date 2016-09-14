@@ -12,3 +12,8 @@ export function haversineDistance(p1, p2) {
 
   return R * 2 * Math.asin(Math.sqrt(a));
 }
+
+//  Levenshtein distance between strings
+declare var require: any;
+let levenshtein = require('fast-levenshtein')
+export var levenshteinDistance = levenshtein.get;

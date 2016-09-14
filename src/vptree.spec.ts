@@ -1,7 +1,7 @@
 import { VPTree } from './vptree';
 declare var require: any;
 var capitals = require('./data/capitals.json');
-import { haversineDistance } from './utils/distancesLibrary';
+import { haversineDistance, levenshteinDistance } from './utils/distancesLibrary';
 
 describe("test VPTree creation", () => {
   var vpTree: VPTree;
@@ -144,7 +144,20 @@ describe("search algorithm", () => {
 
   it("should find an element searching recursively thru the tree", () => {
     vpTree.makeVPTree([1, 2, 3, 4, 5, /* 6, 7, */ 8, 9, 10]);
-    expect(vpTree.find(6)).toBe(5);
+    expect(vpTree.find(6).id).toBe(5);
+  });
+});
+
+describe("test for levenshteinDistance", () => {
+  var vpTree: VPTree;
+
+  beforeEach(() => {
+    vpTree = new VPTree(['love', 'laugh', 'live', 'yolo', 'lol'], levenshteinDistance);
+  });
+
+  it("closest word lolo", () => {
+    let word = vpTree.find('die');
+    expect(word.id).toBe('live');
   });
 });
 

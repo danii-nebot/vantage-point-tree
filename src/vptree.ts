@@ -135,9 +135,9 @@ export class VPTree {
 
     // P $:=$ Random sample of S;
     for (let i = 0; (i < 5 && i < list.length); i++) {
-      let randomIndex = Math.floor(Math.random() * list.length);
-      let D: Array<any> = [];
-      let distances: Array<number> = [];
+      let randomIndex = Math.floor(Math.random() * list.length),
+        D: Array<any> = [],
+        distances: Array<number> = [];
 
       for (let j = 0; (j < 10 && j < list.length); j++) {
         D.push(Math.floor(Math.random() * list.length));

@@ -12,7 +12,6 @@ export class Node {
 }
 
 export class Item {
-
   dist: number;
   // unused
   // hist: Array<number> = [];
@@ -50,7 +49,7 @@ export class NQueue {
     }
 
     if (this.queue.length === 1) {
-      return this.queue[0].id;
+      return this.queue[0];
     }
 
     return this.queue;

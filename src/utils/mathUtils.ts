@@ -18,7 +18,6 @@ export function secondMoment(values: Array<number>, mu: number = 0) {
   if (isNaN(mu)) {
     return 0;
   }
-  let mean: number = values.reduce((prev, curr) => prev + curr) / values.length;
-  mean -= mu;
+  let mean: number = values.reduce((prev, curr) => prev + curr - mu) / values.length;
   return values.reduce((prev, curr) => prev + (curr - mu - mean) * (curr - mu - mean)) / (values.length - 1);
 }

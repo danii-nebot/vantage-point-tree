@@ -134,12 +134,12 @@ describe("search algorithm", () => {
 
   it("should return the root when searching for it", () => {
     vpTree.makeVPTree([1]);
-    expect(vpTree.find(1)).toBe(1);
+    expect(vpTree.find(1).id).toBe(1);
   });
 
   it("should return the root when it is within the search radius", () => {
     vpTree.makeVPTree([1]);
-    expect(vpTree.find(5, 1, 5)).toBe(1);
+    expect(vpTree.find(5, 1, 5).id).toBe(1);
   });
 
   it("should find an element searching recursively thru the tree", () => {
@@ -158,7 +158,7 @@ describe("test for large dataset", () => {
 
   it("closest capital to Alicante should be Madrid, SPN", () => {
     let capital = vpTree.find({ 'lat': 38.3, 'lon': -0.5 });
-    expect(capital.country).toBe("SPN");
+    expect(capital.id.country).toBe('SPN');
   });
 
   it("closest three capitals to random point should be ordered", () => {

@@ -43,7 +43,7 @@ export class NQueue {
     }
   }
 
-  getResult() {
+  getResult(): any {
     if (!this.queue.length) {
       return null;
     }

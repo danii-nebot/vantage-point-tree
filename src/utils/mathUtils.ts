@@ -1,4 +1,3 @@
-
 // https://gist.github.com/caseyjustus/1166258
 export function median(values: Array<number>) {
   values.sort(function(a, b) { return a - b; });

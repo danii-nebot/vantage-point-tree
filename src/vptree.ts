@@ -25,7 +25,7 @@ export class VPTree {
   /**
   * distance function
   */
-  d(a: any, b: any) {
+  d(a: any, b: any): number {
     if (this.dist) {
       return this.dist(a, b);
     }
@@ -50,7 +50,7 @@ export class VPTree {
   /**
   * Given set S of metric space elements, returns pointer to the root of an optimized vp-tree
   */
-  recurseVPTRee(list: Array<Item>) {
+  recurseVPTRee(list: Array<Item>): Node {
     if (list.length === 0) {
       return null;
     }
@@ -120,7 +120,7 @@ export class VPTree {
   * the candidate with the largest moment is chosen
   */
   // TODO: TEST!
-  selectVantagePointIndex(list: Array<any>) {
+  selectVantagePointIndex(list: Array<any>): number {
 
     if (!list.length) {
       return null;
@@ -171,7 +171,7 @@ export class VPTree {
   * n: number of items to find (n-nearest)
   * r: search radius
   */
-  find(q: any, n: number = 1, r: number = Infinity) {
+  find(q: any, n: number = 1, r: number = Infinity): any {
     var tau: number = r;
     var queue = new NQueue(n, r);
     this.numberOfSearchOps = 0;

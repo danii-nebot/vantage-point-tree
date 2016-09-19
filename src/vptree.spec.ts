@@ -1,7 +1,7 @@
 import { VPTree } from './vptree';
-declare var require: any;
-var capitals = require('./data/capitals.json');
 import { haversineDistance, levenshteinDistance } from './utils/distancesLibrary';
+// ts woes :(
+declare var require: any;
 
 describe("test VPTree creation", () => {
   var vpTree: VPTree;
@@ -166,6 +166,7 @@ describe("test for large dataset", () => {
   var vpTree: VPTree;
 
   beforeEach(() => {
+    const capitals = require('./data/capitals.json');
     vpTree = new VPTree(capitals, haversineDistance);
   });
 

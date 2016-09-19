@@ -223,13 +223,13 @@ export class VPTree {
   /**
   * LOG:
   */
-  recursivePrint(node: Node) {
+  recursivePrint(node: Node, prefix: string = '', postfix: string = '') {
     if (!node) {
       return;
     }
-    console.log(node);
-    this.recursivePrint(node.left);
-    this.recursivePrint(node.right);
+    console.log(`${prefix} ${node.p} ${postfix}`);
+    this.recursivePrint(node.left, prefix, `/${postfix}`);
+    this.recursivePrint(node.right, `${prefix}\\`, postfix);
   }
 
   print() {

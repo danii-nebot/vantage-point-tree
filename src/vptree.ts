@@ -172,12 +172,12 @@ export class VPTree {
   * r: search radius
   */
   find(q: any, n: number = 1, r: number = Infinity): any {
-    var tau: number = r;
-    var queue = new NQueue(n, r);
+    let tau: number = r;
+    let queue = new NQueue(n, r);
     this.numberOfSearchOps = 0;
 
     // internal procedure to search
-    var search = (node: Node) => {
+    let search = (node: Node) => {
       if (!node) {
         return null;
       }

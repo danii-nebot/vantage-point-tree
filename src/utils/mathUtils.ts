@@ -2,7 +2,7 @@
 export function median(values: Array<number>) {
   values.sort(function(a, b) { return a - b; });
 
-  var half = Math.floor(values.length / 2);
+  const half = Math.floor(values.length / 2);
 
   if (values.length % 2) {
     return values[half];
@@ -17,6 +17,6 @@ export function secondMoment(values: Array<number>, mu: number = 0) {
   if (isNaN(mu)) {
     return 0;
   }
-  let mean: number = values.reduce((prev, curr) => prev + curr - mu) / values.length;
+  const mean: number = values.reduce((prev, curr) => prev + curr - mu) / values.length;
   return values.reduce((prev, curr) => prev + (curr - mu - mean) * (curr - mu - mean)) / (values.length - 1);
 }

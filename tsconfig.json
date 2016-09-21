@@ -30,7 +30,7 @@
     "typings/browser.d.ts"
   ],
   "compileOnSave": true,
-  "buildOnSave": false,
+  "buildOnSave": true,
   "atom": {
     "rewriteTsconfig": false,
     "formatOnSave": true

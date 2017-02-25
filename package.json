@@ -1,5 +1,5 @@
 {
-  "name": "vptree",
+  "name": "vantage-point-tree",
   "version": "0.0.1",
   "author": "Danii Nebot <daniign@gmail.com>",
   "description": "TypeScript implementation of the Vantage-Point Tree N-Nearest Neighbor search algorithm",
@@ -12,7 +12,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git://github.com/danii-nebot/vptree.git"
+    "url": "git://github.com/danii-nebot/vantage-point-tree.git"
   },
   "devDependencies": {
     "browserify": "^13.1.0",

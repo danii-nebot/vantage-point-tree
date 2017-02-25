@@ -5,7 +5,7 @@
   "description": "TypeScript implementation of the Vantage-Point Tree N-Nearest Neighbor search algorithm",
   "main": "dist/index.js",
   "scripts": {
-    "test": "tsc && cp -a ./src/data/. ./dist/data & ./node_modules/karma/bin/karma start",
+    "test": "tsc & ./node_modules/karma/bin/karma start",
     "build": "tsc",
     "prepublish": "tsc"
   },

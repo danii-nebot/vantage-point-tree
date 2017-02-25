@@ -166,7 +166,7 @@ describe("test for large dataset", () => {
   var vpTree: VPTree;
 
   beforeEach(() => {
-    const capitals = require('./data/capitals.json');
+    const capitals = require('../data/capitals.json');
     vpTree = new VPTree(capitals, haversineDistance);
   });
 

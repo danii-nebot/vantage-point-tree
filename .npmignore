@@ -6,11 +6,12 @@ tsconfig.json
 typings.json
 *.ts
 .npmignore
-*.test.js
-*.test.d.ts
 *.log
 *.tgz
 !index.d.ts
 !index.ref.d.ts
 !*.d.ts
+.config
+dist/*.spec.js
+dist/*.spec.d.ts
 

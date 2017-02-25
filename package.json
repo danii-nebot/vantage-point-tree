@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Danii Nebot <daniign@gmail.com>",
   "description": "TypeScript implementation of the Vantage-Point Tree N-Nearest Neighbor search algorithm",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "tsc && cp -a ./src/data/. ./dist/data & ./node_modules/karma/bin/karma start",
     "build": "tsc",

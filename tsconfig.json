@@ -24,6 +24,7 @@
   ],
   "exclude": [
     "dist/*.d.ts",
+    "dist/**/*.d.ts",
     "index.d.ts",
     "node_modules",
     "typings/browser",

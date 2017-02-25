@@ -5,7 +5,9 @@
   "description": "TypeScript implementation of the Vantage-Point Tree N-Nearest Neighbor search algorithm",
   "main": "index.js",
   "scripts": {
-    "test": "cp -a ./src/data/. ./dist/data & ./node_modules/karma/bin/karma start"
+    "test": "tsc && cp -a ./src/data/. ./dist/data & ./node_modules/karma/bin/karma start",
+    "build": "tsc",
+    "prepublish": "tsc"
   },
   "license": "ISC",
   "repository": {
@@ -22,6 +24,7 @@
     "karma-jasmine": "^1.0.2",
     "requirejs": "^2.2.0",
     "systemjs": "^0.19.37",
+    "typescript": "^2.2.1",
     "watchify": "^3.7.0"
   }
 }

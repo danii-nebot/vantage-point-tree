@@ -1,6 +1,6 @@
 {
   "name": "vantage-point-tree",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Danii Nebot <daniign@gmail.com>",
   "description": "TypeScript implementation of the Vantage-Point Tree N-Nearest Neighbor search algorithm",
   "main": "dist/index.js",
@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "browserify": "^13.1.0",
-    "fast-levenshtein": "^2.0.4",
     "jasmine-core": "2.4.1",
     "karma": "^1.2.0",
     "karma-browserify": "^5.1.0",
@@ -26,5 +25,8 @@
     "systemjs": "^0.19.37",
     "typescript": "^2.2.1",
     "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "fast-levenshtein": "^2.0.6"
   }
 }

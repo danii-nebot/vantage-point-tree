@@ -5,7 +5,12 @@ typings
 tsconfig.json
 typings.json
 *.ts
-!*.d.ts
 .npmignore
 *.test.js
 *.test.d.ts
+*.log
+*.tgz
+!index.d.ts
+!index.ref.d.ts
+!*.d.ts
+

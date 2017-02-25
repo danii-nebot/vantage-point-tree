@@ -1,6 +1,6 @@
 .atomignore
 node_modules
-tests
+data
 typings
 tsconfig.json
 typings.json

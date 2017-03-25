@@ -6,6 +6,7 @@
 # npm
 *.tgz
 npm-debug.log
+package
 
 # dependencies
 /node_modules
